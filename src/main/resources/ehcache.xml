@@ -1,21 +1,18 @@
-<ehcache:config
-        xmlns:ehcache="http://www.ehcache.org/v3"
-        xmlns:jcache="http://www.ehcache.org/v3/jsr107">
+<config xmlns='http://www.ehcache.org/v3' xmlns:jsr107='http://www.ehcache.org/v3/jsr107'>
 
-    <ehcache:service>
-        <jcache:defaults enable-management="false" enable-statistics="false" />
-    </ehcache:service>
-
-    <ehcache:cache alias="employees" uses-template="template-config-cache" />
-
-    <!-- the config cache template -->
-    <ehcache:cache-template name="template-config-cache">
+    <!-- Default cache template -->
+    <cache-template name="default">
         <expiry>
             <ttl unit="hours">1</ttl>
         </expiry>
         <resources>
-            <heap unit="entries">2000</heap>
+            <heap>1000</heap>
         </resources>
-    </ehcache:cache-template>
+    </cache-template>
 
-</ehcache:config>
+    <cache alias="employees" uses-template="default">
+        <!-- <key-type>java.lang.String</key-type> -->
+        <!-- <value-type>com.colak.springtutorial.employee.dto.EmployeeDTO</value-type> -->
+    </cache>
+
+</config>
